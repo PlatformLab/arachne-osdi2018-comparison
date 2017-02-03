@@ -2,9 +2,8 @@ package main
 
 import "fmt"
 import "time"
-//import "runtime"
 
-const numRuns = 10000
+const numRuns = 100000
 
 type  timeRecord struct{
     Ts time.Time
@@ -23,7 +22,6 @@ func main() {
         timeStamps = append(timeStamps, timeRecord{time.Now(), "Before creation"})
         go threadMain(0, 1)
         time.Sleep(100 * time.Microsecond)
-//        runtime.Gosched()
     }
 
     // Regularize 
@@ -37,6 +35,4 @@ func main() {
     for i := 1; i < len(timeStamps) ; i++ {
         fmt.Printf("%8d ns (+%6d ns): %s\n", regularizedTime[i], (regularizedTime[i] - regularizedTime[i-1]).Nanoseconds(), timeStamps[i].Msg)
     }
-//    2919249.0 ns (+45122.6 ns): Inside thread
-//    3044439.6 ns (+125190.7 ns): A thread is about to be born!
 }

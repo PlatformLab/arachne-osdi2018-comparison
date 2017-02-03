@@ -1,0 +1,38 @@
+$ ./RunGoThreadCreate.sh
+GOMAXPROCS = 2
+Event              Median      Min      Max  Average   Count
+------------------------------------------------------------
+Before creation  178127.0  24673.0 4100428.0 175918.9   99999
+Inside thread     43109.0   2325.0 264497.0  45057.1  100000
+
+GOMAXPROCS = 3
+Event              Median      Min      Max  Average   Count
+------------------------------------------------------------
+Before creation  178566.0    791.0 4208359.0 171575.8   99999
+Inside thread     33121.0   1933.0 160236.0  35250.9  100000
+
+GOMAXPROCS = 4
+Event              Median      Min      Max  Average   Count
+------------------------------------------------------------
+Before creation  177614.0  22206.0 4219562.0 170664.6   99999
+Inside thread     33300.0   1875.0 143892.0  35816.6  100000
+
+[hq6@rc40 ComparisonTests] 2017-02-03 15:37:01
+$ ./RunGoThreadCreate.sh
+GOMAXPROCS = 2
+Event              Median      Min      Max  Average   Count
+------------------------------------------------------------
+Before creation  178724.0  34926.0 4125844.0 176546.3   99999
+Inside thread     42284.0   2361.0 145919.0  43901.2  100000
+
+GOMAXPROCS = 3
+Event              Median      Min      Max  Average   Count
+------------------------------------------------------------
+Before creation  176588.0  37839.0 4165813.0 169971.9   99999
+Inside thread     33538.0   1091.0 136465.0  36391.4  100000
+
+GOMAXPROCS = 4
+Event              Median      Min      Max  Average   Count
+------------------------------------------------------------
+Before creation  176619.0  31032.0 4113178.0 170253.9   99999
+Inside thread     33783.0   2304.0 149674.0  36614.2  100000
