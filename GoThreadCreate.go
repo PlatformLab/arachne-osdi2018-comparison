@@ -3,25 +3,27 @@ package main
 import "fmt"
 import "time"
 
-const numRuns = 100000
+const numRuns = 10000
 
 type  timeRecord struct{
     Ts time.Time
     Msg string
 }
 
-
 var timeStamps []timeRecord
-func threadMain(a, b int) {
+
+func threadMain(done chan bool) {
     timeStamps = append(timeStamps, timeRecord{time.Now(), "Inside thread"})
+    done <- true
 }
 
 func main() {
     timeStamps = make([]timeRecord, 0, numRuns*2)
+    done := make(chan bool)
     for i := 0; i < numRuns; i++ {
         timeStamps = append(timeStamps, timeRecord{time.Now(), "Before creation"})
-        go threadMain(0, 1)
-        time.Sleep(100 * time.Microsecond)
+        go threadMain(done)
+        <-done
     }
 
     // Regularize
