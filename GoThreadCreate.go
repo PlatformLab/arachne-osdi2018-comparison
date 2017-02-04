@@ -24,7 +24,7 @@ func main() {
         time.Sleep(100 * time.Microsecond)
     }
 
-    // Regularize 
+    // Regularize
     regularizedTime := make([]time.Duration, numRuns*2)
     for i := 0; i < len(timeStamps) ; i++ {
         regularizedTime[i] = timeStamps[i].Ts.Sub(timeStamps[0].Ts)
