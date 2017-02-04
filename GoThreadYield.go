@@ -4,8 +4,6 @@ import "fmt"
 import "time"
 import "runtime"
 
-const numRuns = 10000
-
 type  timeRecord struct{
     Ts time.Time
     Msg string
@@ -22,7 +20,7 @@ func threadMain(start, end int64) {
 }
 
 func main() {
-    go threadMain(1, 9999)
-    go threadMain(2,10000)
-    time.Sleep(5 * time.Second)
+    go threadMain(1, 99999999)
+    go threadMain(2,100000000)
+    time.Sleep(30 * time.Second)
 }
