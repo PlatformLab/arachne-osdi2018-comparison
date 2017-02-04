@@ -16,7 +16,7 @@ using PerfUtils::Cycles;
 using PerfUtils::TimeTrace;
 using PerfUtils::Util::pinThreadToCore;
 
-int core = 0;
+int core = 1;
 void printEveryN(int start, int end, int increment) {
     pinThreadToCore(core);
     uint64_t startTime = Cycles::rdtsc();
