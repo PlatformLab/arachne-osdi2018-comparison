@@ -2,6 +2,8 @@ package main
 
 import "fmt"
 import "time"
+import "os"
+import "strconv"
 
 const numRuns = 10000
 
@@ -20,9 +22,19 @@ func threadMain(done chan bool) {
 func main() {
     timeStamps = make([]timeRecord, 0, numRuns*2)
     done := make(chan bool)
+    dummy := 0
+    limit, err := strconv.ParseInt(os.Args[1], 10, 64)
+
+    if err != nil {
+        return
+    }
+
     for i := 0; i < numRuns; i++ {
         timeStamps = append(timeStamps, timeRecord{time.Now(), "Before creation"})
         go threadMain(done)
+        for j := 0; j < int(limit); j++ {
+            dummy += j
+        }
         <-done
     }
 
