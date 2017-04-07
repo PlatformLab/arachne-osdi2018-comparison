@@ -5,7 +5,7 @@ import "time"
 import "runtime"
 import "os"
 
-const numRuns = 1000000
+const NUM_SAMPLES = 1000000
 
 var latencies []time.Duration
 
@@ -28,10 +28,10 @@ func task(creationTime time.Time) {
 
 func main() {
     done = make(chan bool)
-    latencies = make([]time.Duration, 0, numRuns*2)
+    latencies = make([]time.Duration, 0, NUM_SAMPLES)
     runtime.GOMAXPROCS(2)
 
-    for i := 0; i < numRuns; i++ {
+    for i := 0; i < NUM_SAMPLES; i++ {
         ran = false
         go task(time.Now())
         for ! ran { }
@@ -44,7 +44,7 @@ func main() {
         fmt.Printf("Failed to open output file. err = %s\n", err);
         return;
     }
-    for i := 0; i < numRuns; i++ {
+    for i := 0; i < NUM_SAMPLES; i++ {
         fmt.Fprintf(fh, "%v\n", latencies[i].Nanoseconds())
     }
     fh.Close()

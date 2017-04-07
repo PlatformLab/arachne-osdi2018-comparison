@@ -5,3 +5,4 @@ ThreadCreationTest
 ThreadCreationTest.log
 ThreadYieldTest
 StdThreadCVWakeup
+GoThreadCV
