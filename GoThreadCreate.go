@@ -3,29 +3,38 @@ package main
 import "fmt"
 import "time"
 import "runtime"
-
 import "os"
-//import "strconv"
 
 const numRuns = 1000000
 
 var latencies []time.Duration
 
-// Artificial join mechanism
+// Using this variable, we force task onto a different core, since main must poll.
+// This technically violates the memory model described here, but we are using
+// the channel to ensure correct ordering, and using this bool only to force
+// the creator and createe to run in parallel.
+//
+// https://golang.org/ref/mem
+var ran bool
+
+// Artifical goroutine join
 var done chan bool
 
 func task(creationTime time.Time) {
     latencies = append(latencies, time.Since(creationTime))
+    ran = true
     done <- true
 }
 
 func main() {
-    latencies = make([]time.Duration, 0, numRuns*2)
     done = make(chan bool)
+    latencies = make([]time.Duration, 0, numRuns*2)
     runtime.GOMAXPROCS(2)
 
     for i := 0; i < numRuns; i++ {
+        ran = false
         go task(time.Now())
+        for ! ran { }
         <-done
     }
 
