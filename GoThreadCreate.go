@@ -2,51 +2,41 @@ package main
 
 import "fmt"
 import "time"
+import "runtime"
+
 import "os"
-import "strconv"
+//import "strconv"
 
-const numRuns = 10000
+const numRuns = 1000000
 
-type  timeRecord struct{
-    Ts time.Time
-    Msg string
-}
+var latencies []time.Duration
 
-var timeStamps []timeRecord
+// Artificial join mechanism
+var done chan bool
 
-func threadMain(done chan bool) {
-    timeStamps = append(timeStamps, timeRecord{time.Now(), "Inside thread"})
+func task(creationTime time.Time) {
+    latencies = append(latencies, time.Since(creationTime))
     done <- true
 }
 
 func main() {
-    timeStamps = make([]timeRecord, 0, numRuns*2)
-    done := make(chan bool)
-    dummy := 0
-    limit, err := strconv.ParseInt(os.Args[1], 10, 64)
-
-    if err != nil {
-        return
-    }
+    latencies = make([]time.Duration, 0, numRuns*2)
+    done = make(chan bool)
+    runtime.GOMAXPROCS(2)
 
     for i := 0; i < numRuns; i++ {
-        timeStamps = append(timeStamps, timeRecord{time.Now(), "Before creation"})
-        go threadMain(done)
-        for j := 0; j < int(limit); j++ {
-            dummy += j
-        }
+        go task(time.Now())
         <-done
     }
 
-    // Regularize
-    regularizedTime := make([]time.Duration, numRuns*2)
-    for i := 0; i < len(timeStamps) ; i++ {
-        regularizedTime[i] = timeStamps[i].Ts.Sub(timeStamps[0].Ts)
+    // Output data
+    fh, err := os.Create("data/Go Thread Creation")
+    if err != nil {
+        fmt.Printf("Failed to open output file. err = %s\n", err);
+        return;
     }
-
-    // Fake timetraced
-    fmt.Printf("%6d ns (+%6d ns): %s\n", 0, 0, timeStamps[0].Msg)
-    for i := 1; i < len(timeStamps) ; i++ {
-        fmt.Printf("%8d ns (+%6d ns): %s\n", regularizedTime[i], (regularizedTime[i] - regularizedTime[i-1]).Nanoseconds(), timeStamps[i].Msg)
+    for i := 0; i < numRuns; i++ {
+        fmt.Fprintf(fh, "%v\n", latencies[i].Nanoseconds())
     }
+    fh.Close()
 }

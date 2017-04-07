@@ -14,7 +14,7 @@
 
 using PerfUtils::Cycles;
 
-#define NUM_SAMPLES 100
+#define NUM_SAMPLES 1000000
 
 std::atomic<uint64_t> arrayIndex;
 uint64_t latencies[NUM_SAMPLES];
