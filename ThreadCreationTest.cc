@@ -31,6 +31,8 @@ int main() {
         std::thread(task, Cycles::rdtsc()).join();
     }
     if (arrayIndex != NUM_SAMPLES) abort();
+    for (int i = 0; i < NUM_SAMPLES; i++)
+        latencies[i] = Cycles::toNanoseconds(latencies[i]);
     printStatistics("Thread Creation Latency", latencies, NUM_SAMPLES, "data");
     printf("CYCLES_PER_SECOND: %lf\n", Cycles::perSecond());
 }

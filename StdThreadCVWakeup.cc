@@ -53,6 +53,9 @@ int main(int argc, const char** argv){
     consumerThread.join();
 
     if (arrayIndex != NUM_SAMPLES) abort();
+    for (int i = 0; i < NUM_SAMPLES; i++)
+        latencies[i] = Cycles::toNanoseconds(latencies[i]);
     printStatistics("Condition Variable Wakeup", latencies, NUM_SAMPLES, "data");
+    printf("CYCLES_PER_SECOND: %lf\n", Cycles::perSecond());
     return 0;
 }
