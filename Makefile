@@ -1,4 +1,4 @@
-BINS=ThreadCreationTest ThreadYieldTest StdThreadCVWakeup
+BINS=ThreadCreationTest ThreadYieldTest StdThreadCVWakeup ThreadCreationScalability
 GO_BINS=GoThreadCreate GoThreadYield GoThreadCV GoThreadCreationScalability
 
 CXXFLAGS=-std=c++11 -O3 -g -Wall -Werror -Wformat=2 -Wextra -Wwrite-strings -Wno-unused-parameter -Wmissing-format-attribute -Wno-non-template-friend -Woverloaded-virtual -Wcast-qual -Wcast-align -Wconversion -fomit-frame-pointer
