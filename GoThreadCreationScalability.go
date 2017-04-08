@@ -46,8 +46,7 @@ func main() {
         <-done
     }
     duration := time.Since(startTime)
-    fmt.Printf("Total Thread Creations: %v\n", globalCount)
-    fmt.Printf("Total Time in Nanoseconds: %v\n", duration.Nanoseconds())
-    fmt.Printf("Thread Creations Per Second: %f\n",
-        float64(globalCount) / duration.Seconds())
+    // Number of Seconds,Number Of Cores,Creations Per Second
+    fmt.Printf("%d,%d,%v\n", numSeconds, numCores,
+            uint64(float64(globalCount) / duration.Seconds()))
 }

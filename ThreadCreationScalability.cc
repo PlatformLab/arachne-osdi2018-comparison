@@ -49,8 +49,8 @@ int main(int argc, const char** argv) {
         done.wait();
 	duration = Cycles::toSeconds(Cycles::rdtsc() - startTime);
 
-	printf("Total Thread Creations: %lu\n", globalCount.load());
-	printf("Thread Time in Nanoseconds: %lu\n",  static_cast<uint64_t>(duration*1E9));
-	printf("Thread Creations Per Second: %lf\n", static_cast<double>(globalCount.load()) / duration);
+    // Number of Seconds,Number Of Cores,Creations Per Second
+	printf("%d,%d,%lu\n", numSeconds, numCores,
+            static_cast<uint64_t>(static_cast<double>(globalCount.load()) / duration));
     return 0;
 }
