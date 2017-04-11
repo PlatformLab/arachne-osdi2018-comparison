@@ -21,14 +21,16 @@ std::atomic<uint64_t> beforeNotify;
 std::condition_variable productIsReady;
 std::mutex mutex;
 
-std::atomic<bool> producerHasStarted;
+std::atomic<bool> producerMustWait;
 
 void producer() {
-    producerHasStarted = true;
+    PerfUtils::Util::pinThreadToCore(1);
+    producerMustWait = true;
 	for (int i = 0; i < NUM_SAMPLES; i++) {
-        while (producerHasStarted);
-        producerHasStarted = true;
+        while (producerMustWait);
+        producerMustWait = true;
         mutex.lock();
+        Cycles::sleep(10);
         beforeNotify = Cycles::rdtsc();
 	    productIsReady.notify_one();
         mutex.unlock();
@@ -36,9 +38,10 @@ void producer() {
 }
 
 void consumer() {
+    PerfUtils::Util::pinThreadToCore(2);
     std::unique_lock<std::mutex> guard(mutex);
 	for (int i = 0; i < NUM_SAMPLES; i++) {
-        producerHasStarted = false;
+        producerMustWait = false;
         productIsReady.wait(guard);
         latencies[arrayIndex++] = Cycles::rdtsc() - beforeNotify;
 	}
@@ -47,7 +50,7 @@ void consumer() {
 int main(int argc, const char** argv){
     // Add some work
     std::thread producerThread(producer);
-    while(!producerHasStarted);
+    while(!producerMustWait);
     std::thread consumerThread(consumer);
     producerThread.join();
     consumerThread.join();
