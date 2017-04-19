@@ -9,20 +9,11 @@ const NUM_SAMPLES = 1000000
 
 var latencies []time.Duration
 
-// Using this variable, we force task onto a different core, since main must poll.
-// This technically violates the memory model described here, but we are using
-// the channel to ensure correct ordering, and using this bool only to force
-// the creator and createe to run in parallel.
-//
-// https://golang.org/ref/mem
-var ran bool
-
 // Artifical goroutine join
 var done chan bool
 
 func task(creationTime time.Time) {
     latencies = append(latencies, time.Since(creationTime))
-    ran = true
     done <- true
 }
 
@@ -32,9 +23,7 @@ func main() {
     runtime.GOMAXPROCS(2)
 
     for i := 0; i < NUM_SAMPLES; i++ {
-        ran = false
         go task(time.Now())
-        for ! ran { }
         <-done
     }
 
