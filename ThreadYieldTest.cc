@@ -7,9 +7,9 @@
 #include <errno.h>
 #include <string.h>
 
-#include "Cycles.h"
-#include "TimeTrace.h"
-#include "Util.h"
+#include "PerfUtils/Cycles.h"
+#include "PerfUtils/TimeTrace.h"
+#include "PerfUtils/Util.h"
 
 
 using PerfUtils::Cycles;

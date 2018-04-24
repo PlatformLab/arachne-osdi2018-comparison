@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <atomic>
 
-#include "Cycles.h"
+#include "PerfUtils/Cycles.h"
 #include "Stats.h"
 
 using PerfUtils::Cycles;

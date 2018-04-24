@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <atomic>
 #include <thread>
-#include "Cycles.h"
+#include "PerfUtils/Cycles.h"
 #include "Semaphore.h"
 
 #define CORE_OCCUPANCY 3
