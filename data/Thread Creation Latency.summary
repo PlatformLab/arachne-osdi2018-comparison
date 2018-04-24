@@ -1,8 +1,0 @@
-$ time ./ThreadCreationTest
-Benchmark,Count,Avg,Median,Min,99%,99.9%,99.99%,Max
-Thread Creation Latency,1000000,17569,16896,14771,32230,44949,241296,2442641
-CYCLES_PER_SECOND: 2933181981.801820
-
-real    0m10.274s
-user    0m0.620s
-sys     0m10.776s

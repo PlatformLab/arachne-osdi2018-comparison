@@ -1,7 +1,0 @@
-$ time  ./StdThreadBlockSignal
-Benchmark,Count,Avg,Median,Min,99%,99.9%,99.99%,Max
-Condition Variable Wakeup,1000000,2092,1993,1295,2537,2587,10092,50801
-
-real    0m1.224s
-user    0m1.172s
-sys     0m0.820s
