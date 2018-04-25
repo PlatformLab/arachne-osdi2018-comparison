@@ -58,6 +58,6 @@ int main(int argc, const char** argv){
     if (arrayIndex != NUM_SAMPLES) abort();
     for (int i = 0; i < NUM_SAMPLES; i++)
         latencies[i] = Cycles::toNanoseconds(latencies[i]);
-    printStatistics("Condition Variable Wakeup", latencies, NUM_SAMPLES, "data");
+    printStatistics("std::condition_variable Wakeup", latencies, NUM_SAMPLES, "data");
     return 0;
 }

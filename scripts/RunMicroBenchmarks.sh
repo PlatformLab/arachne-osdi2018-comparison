@@ -6,12 +6,11 @@
 mkdir -p data
 
 # StdThread benchmarks
-bin/ThreadCreationTest
-bin/StdThreadCVWakeup
+output=$(bin/ThreadCreationTest)
+output+=$'\n'$(bin/StdThreadCVWakeup | tail -n1)
 
 # Golang benchmarks
-bin/GoThreadCreate && bin/ExtractStats data/Go\ Thread\ Creation
-bin/GoThreadCV && bin/ExtractStats data/Go\ Condition\ Variable
+output+=$'\n'$(bin/GoThreadCreate && bin/ExtractStats data/Go\ Thread\ Creation "Go Thread Creation" | tail -n1)
+output+=$'\n'$(bin/GoThreadCV && bin/ExtractStats data/Go\ Condition\ Variable "Go Condition Variable" | tail -n1)
 
-# uThreads benchmarks
-
+echo "$output" | scripts/column.py -s,

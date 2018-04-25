@@ -33,5 +33,5 @@ int main() {
     if (arrayIndex != NUM_SAMPLES) abort();
     for (int i = 0; i < NUM_SAMPLES; i++)
         latencies[i] = Cycles::toNanoseconds(latencies[i]);
-    printStatistics("Thread Creation Latency", latencies, NUM_SAMPLES, "data");
+    printStatistics("std::thread Creation", latencies, NUM_SAMPLES, "data");
 }
