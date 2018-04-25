@@ -6,9 +6,13 @@ BIN_DIR = bin
 
 # Dependencies
 PERFUTILS=../PerfUtils
-LIBS=-I../Arachne  -I$(PERFUTILS)/include $(PERFUTILS)/lib/libPerfUtils.a  -pthread
+ARACHNE=../arachne-all/Arachne
+COREARBITER=../arachne-all/CoreArbiter
+
+LIBS=-I$(ARACHNE)/include -I$(PERFUTILS)/include  $(ARACHNE)/lib/libArachne.a -L$(COREARBITER)/lib -lCoreArbiter $(PERFUTILS)/lib/libPerfUtils.a  -lpcrecpp -pthread
 
 BINS=ThreadCreationTest ThreadYieldTest StdThreadCVWakeup ThreadCreationScalability ExtractStats \
+	ArachneCreationScalability \
 	GoThreadCreate GoThreadYield GoThreadCV GoThreadCreationScalability
 
 FULL_BINS = $(patsubst %,$(BIN_DIR)/%,$(BINS))
