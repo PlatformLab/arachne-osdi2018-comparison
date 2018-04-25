@@ -22,7 +22,7 @@ static int error;
 int main(int argc, const char** argv){
     // Second argument is line count.
     if (argc < 2) {
-        printf("Usage: ExtractStats.cc <FileName>\n");
+        printf("Usage: ExtractStats.cc <FileName> [DisplayName]\n");
         exit(1);
     }
     char cmd[1024];
@@ -37,6 +37,6 @@ int main(int argc, const char** argv){
          error = fscanf(f, "%lu\n", buffer + i);
     }
     fclose(f);
-    printStatistics(argv[1], buffer, lineCount, NULL);
+    printStatistics(argv[argc > 2 ? 2 : 1], buffer, lineCount, NULL);
 }
 
