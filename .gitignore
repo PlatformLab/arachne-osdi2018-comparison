@@ -8,3 +8,4 @@ GoThreadCreationScalability
 ThreadCreationScalability
 ExtractStats
 data/
+bin/
