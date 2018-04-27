@@ -13,7 +13,7 @@ LIBS=-I$(ARACHNE)/include -I$(PERFUTILS)/include  $(ARACHNE)/lib/libArachne.a -L
 
 BINS=ThreadCreationTest ThreadYieldTest StdThreadCVWakeup ThreadCreationScalability ExtractStats \
 	ArachneCreationScalability ArachneSingleCreatorScalability \
-	GoThreadCreate GoThreadYield GoThreadCV GoThreadCreationScalability
+	GoThreadCreate GoThreadYield GoThreadCV GoThreadCreationScalability GoSingleCreatorScalability
 
 FULL_BINS = $(patsubst %,$(BIN_DIR)/%,$(BINS))
 
