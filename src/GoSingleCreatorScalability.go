@@ -78,5 +78,5 @@ func main(){
 
     dispatch(numSeconds)
 
-    fmt.Printf("%d,%d,%v\n", numSeconds, numCores, (float64(completedRequests) / duration.Seconds()));
+    fmt.Printf("%d,%d,%v\n", numSeconds, numCores, uint64(float64(completedRequests) / duration.Seconds()));
 }
