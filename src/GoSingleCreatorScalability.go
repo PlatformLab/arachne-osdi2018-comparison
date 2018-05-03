@@ -13,7 +13,7 @@ import "sync/atomic"
 // using user-specified number of cores.
 
 // Amount of time each worker should run for, in microseconds.
-const THREAD_RUN_DURATION = 2
+const THREAD_RUN_DURATION = 1
 
 var startTime time.Time
 var stopTime time.Time

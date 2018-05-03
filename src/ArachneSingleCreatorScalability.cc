@@ -13,7 +13,7 @@ using PerfUtils::Cycles;
 // using user-specified number of cores.
 
 // Amount of time each worker should run for, in microseconds.
-#define THREAD_RUN_DURATION 2
+#define THREAD_RUN_DURATION 1
 
 /**
   * The number of threads that finished executing in a given amount of time.
