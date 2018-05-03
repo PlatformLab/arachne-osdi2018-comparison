@@ -12,7 +12,7 @@ COREARBITER=../arachne-all/CoreArbiter
 LIBS=-I$(ARACHNE)/include -I$(PERFUTILS)/include  $(ARACHNE)/lib/libArachne.a -L$(COREARBITER)/lib -lCoreArbiter $(PERFUTILS)/lib/libPerfUtils.a  -lpcrecpp -pthread
 
 BINS=ThreadCreationTest ThreadYieldTest StdThreadCVWakeup ThreadCreationScalability ExtractStats \
-	ArachneCreationScalability ArachneSingleCreatorScalability \
+	ArachneCreationScalability ArachneSingleCreatorScalability SingleCreatorScalability \
 	GoThreadCreate GoThreadYield GoThreadCV GoThreadCreationScalability GoSingleCreatorScalability
 
 FULL_BINS = $(patsubst %,$(BIN_DIR)/%,$(BINS))
@@ -29,4 +29,4 @@ $(BIN_DIR):
 	mkdir -p $(BIN_DIR)
 
 clean:
-	rm -f $(BIN_DIR)
+	rm -rf $(BIN_DIR)
