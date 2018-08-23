@@ -8,8 +8,9 @@ BIN_DIR = bin
 PERFUTILS=../PerfUtils
 ARACHNE=../arachne-all/Arachne
 COREARBITER=../arachne-all/CoreArbiter
+WAIT_FREE_QUEUE=../arachne-all/waitfree-mpsc-queue
 
-LIBS=-I$(ARACHNE)/include -I$(PERFUTILS)/include -I$(COREARBITER)/include  $(ARACHNE)/lib/libArachne.a -L$(COREARBITER)/lib -lCoreArbiter $(PERFUTILS)/lib/libPerfUtils.a  -lpcrecpp -pthread
+LIBS=-I$(ARACHNE)/include -I$(PERFUTILS)/include -I$(COREARBITER)/include -I$(WAIT_FREE_QUEUE)  $(ARACHNE)/lib/libArachne.a -L$(COREARBITER)/lib -lCoreArbiter $(WAIT_FREE_QUEUE)/libmpscq.a $(PERFUTILS)/lib/libPerfUtils.a  -lpcrecpp -pthread
 
 BINS=ThreadCreationTest ThreadYieldTest StdThreadCVWakeup ThreadCreationScalability ExtractStats \
 	ArachneCreationScalability ArachneSingleCreatorScalability SingleCreatorScalability \
