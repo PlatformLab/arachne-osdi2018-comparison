@@ -49,13 +49,6 @@ void timeKeeper(int numCores, int seconds) {
     std::string outputFilename = "ThreadCreationScalability" + std::to_string(numCores) + ".log";
     // TimeTrace::setOutputFileName(outputFilename.c_str());
     // TimeTrace::print();
-    Arachne::PerfStats stats;
-    Arachne::PerfStats::collectStats(&stats);
-    // number of failed creations normalized by number of cores
-//    uint64_t failures = stats.numTimesContended;
-//    printf("Number of failed creations on %d cores = %lu, number of successes = %lu, (%lu normalized, fail/success = %f)\n",
-//           numCores, failures, globalCount.load(), failures/numCores, (double)failures/(double)globalCount.load());
-
     Arachne::shutDown();
 }
 
